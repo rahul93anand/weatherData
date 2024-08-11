@@ -32,6 +32,7 @@ jobs:
             --key-schema \
               AttributeName=$PRIMARY_KEY,KeyType=HASH \
             --attribute-definitions \
+              AttributeName=$PRIMARY_KEY,AttributeType=S \
               AttributeName=city,AttributeType=S \
               AttributeName=temp,AttributeType=N \
             --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5
