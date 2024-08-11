@@ -38,19 +38,19 @@ jobs:
           echo "Table already exists."
         fi
 
-       - |
-      echo "Inserting items..."
-      aws dynamodb put-item \
-        --table-name $TABLE_NAME \
-        --item \
-          '{"id": {"S": "123"}, "city": {"S": "New York"}, "temp": {"N": "75"}}' \
-        --region $AWS_REGION
+      #  - |
+      # echo "Inserting items..."
+      # aws dynamodb put-item \
+      #   --table-name $TABLE_NAME \
+      #   --item \
+      #     '{"id": {"S": "123"}, "city": {"S": "New York"}, "temp": {"N": "75"}}' \
+      #   --region $AWS_REGION
       
-      aws dynamodb put-item \
-        --table-name $TABLE_NAME \
-        --item \
-          '{"id": {"S": "456"}, "city": {"S": "Los Angeles"}, "temp": {"N": "85"}}' \
-        --region $AWS_REGION
+      # aws dynamodb put-item \
+      #   --table-name $TABLE_NAME \
+      #   --item \
+      #     '{"id": {"S": "456"}, "city": {"S": "Los Angeles"}, "temp": {"N": "85"}}' \
+      #   --region $AWS_REGION
 
 
        
