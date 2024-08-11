@@ -21,11 +21,11 @@ jobs:
         TABLE_EXISTS=$(aws dynamodb list-tables --query "TableNames[?TableName=='$TABLE_NAME']" --output text)
         if [ -z "$TABLE_EXISTS" ]; then
           echo "Table does not exist. Creating table..."
-          # aws dynamodb create-table \
-          #   --table-name $TABLE_NAME \
-          #   --attribute-definitions AttributeName=Id,AttributeType=S \
-          #   --key-schema AttributeName=Id,KeyType=HASH \
-          #   --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5
+          aws dynamodb create-table \
+            --table-name $TABLE_NAME \
+            --attribute-definitions AttributeName=Id,AttributeType=S \
+            --key-schema AttributeName=Id,KeyType=HASH \
+            --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5
         else
           echo "Table already exists."
         fi
