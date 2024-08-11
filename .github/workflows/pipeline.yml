@@ -29,12 +29,11 @@ jobs:
           echo "Table does not exist. Creating table..."
           aws dynamodb create-table \
             --table-name $TABLE_NAME \
+            --key-schema \
+              AttributeName=$PRIMARY_KEY,KeyType=HASH \
             --attribute-definitions \
               AttributeName=$PRIMARY_KEY,AttributeType=S \
               AttributeName=city,AttributeType=S \
-              AttributeName=temp,AttributeType=N \
-            --key-schema \
-              AttributeName=$PRIMARY_KEY,KeyType=RANGE \
             --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5
         else
           echo "Table already exists."
