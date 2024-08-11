@@ -1,1 +1,36 @@
-name: AWS Table Management
+name: Check DynamoDB Table
+
+on:
+  push:
+    branches:
+      - main  # Adjust this to your target branch
+
+jobs:
+  check-table:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up AWS CLI
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: baB+kAI3L8zomgzsV6Vg05AgEeyXHL0EoiR+OgnE
+        aws-secret-access-key: AKIA2OOZK46K3QW24KZI
+        aws-region: us-east-1  # Update with your desired region
+
+    - name: Check if DynamoDB table exists
+      run: |
+        TABLE_NAME="YourTableName"
+        TABLE_EXISTS=$(aws dynamodb list-tables --query "TableNames[?TableName=='$TABLE_NAME']" --output text)
+        if [ -z "$TABLE_EXISTS" ]; then
+          echo "Table does not exist. Creating table..."
+          # aws dynamodb create-table \
+          #   --table-name $TABLE_NAME \
+          #   --attribute-definitions AttributeName=Id,AttributeType=S \
+          #   --key-schema AttributeName=Id,KeyType=HASH \
+          #   --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5
+        else
+          # echo "Table already exists."
+        fi
