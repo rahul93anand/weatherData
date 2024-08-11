@@ -1,17 +1,18 @@
 name: Check DynamoDB Table
 
-
-on:
-  push:
-    branches:
-      - main  # Adjust this to your target branch\
-
 variables:
   AWS_REGION: "us-east-1"  # Change to your AWS region
   TABLE_NAME: "weatherdatatwo"
   PRIMARY_KEY: "id"
   CITY_ATTRIBUTE: "city"
   TEMP_ATTRIBUTE: "temp"
+
+
+on:
+  push:
+    branches:
+      - main  # Adjust this to your target branch\
+
 
 jobs:
   check-table:
