@@ -35,7 +35,7 @@ jobs:
               AttributeName=temp,AttributeType=N \
             --key-schema \
               AttributeName=$PRIMARY_KEY,KeyType=HASH \
-            --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 \
+            --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5
         else
           echo "Table already exists."
         fi
