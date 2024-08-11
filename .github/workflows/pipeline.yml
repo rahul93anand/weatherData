@@ -23,7 +23,7 @@ jobs:
     - name: Check if DynamoDB table exists
       run: |
         TABLE_NAME="WeatherDataThree"
-        PRIMARY_KEY="id"
+        PRIMARY_KEY="Id"
         TABLE_EXISTS=$(aws dynamodb list-tables --query "TableNames[?TableName=='$TABLE_NAME']" --output text)
         if [ -z "$TABLE_EXISTS" ]; then
           echo "Table does not exist. Creating table..."
@@ -31,10 +31,10 @@ jobs:
             --table-name $TABLE_NAME \
             --key-schema \
               AttributeName=$PRIMARY_KEY,KeyType=HASH \
-              AttributeName=city,AttributeType=HASH \
             --attribute-definitions \
               AttributeName=$PRIMARY_KEY,AttributeType=S \
               AttributeName=city,AttributeType=S \
+              AttributeName=temp,AttributeType=N \
             --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5
         else
           echo "Table already exists."
