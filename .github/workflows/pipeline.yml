@@ -33,6 +33,7 @@ jobs:
             AttributeName=temperature,AttributeType=N \
           --key-schema \
             AttributeName=city,KeyType=HASH \
+            AttributeName=temperature,KeyType=N \
             --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5
         else
           echo "Table already exists."
