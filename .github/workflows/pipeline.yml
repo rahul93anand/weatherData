@@ -31,7 +31,7 @@ jobs:
             --table-name $TABLE_NAME \
             --key-schema \
               AttributeName=$PRIMARY_KEY,KeyType=HASH \
-              AttributeName=city,AttributeType=S \
+              AttributeName=city,AttributeType=HASH \
             --attribute-definitions \
               AttributeName=$PRIMARY_KEY,AttributeType=S \
               AttributeName=city,AttributeType=S \
