@@ -34,7 +34,7 @@ jobs:
               AttributeName=city,AttributeType=S \
               AttributeName=temp,AttributeType=N \
             --key-schema \
-              AttributeName=$PRIMARY_KEY,KeyType=HASH \
+              AttributeName=$PRIMARY_KEY,KeyType=RANGE \
             --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5
         else
           echo "Table already exists."
