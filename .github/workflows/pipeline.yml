@@ -32,5 +32,5 @@ jobs:
           #   --key-schema AttributeName=Id,KeyType=HASH \
           #   --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5
         else
-          # echo "Table already exists."
+          echo "Table already exists."
         fi
