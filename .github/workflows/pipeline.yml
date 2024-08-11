@@ -30,7 +30,6 @@ jobs:
             --table-name $TABLE_NAME \
             --attribute-definitions \
             AttributeName=city,AttributeType=S \
-            AttributeName=temperature,AttributeType=N \
           --key-schema \
             AttributeName=city,KeyType=HASH \
             --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5
