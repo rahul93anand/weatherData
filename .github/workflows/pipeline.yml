@@ -37,7 +37,7 @@ jobs:
                   AttributeName=city,AttributeType=S \
                   AttributeName=temp,AttributeType=N \
               --key-schema \
-                  AttributeName=$PRIMARY_KEY,KeyType=HASH \
+                  AttributeName=id,KeyType=HASH \
               --provisioned-throughput \
                   ReadCapacityUnits=5,WriteCapacityUnits=5 \
         else
