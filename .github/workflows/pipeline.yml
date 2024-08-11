@@ -3,7 +3,14 @@ name: Check DynamoDB Table
 on:
   push:
     branches:
-      - main  # Adjust this to your target branch
+      - main  # Adjust this to your target branch\
+
+variables:
+  AWS_REGION: "us-east-1"  # Change to your AWS region
+  TABLE_NAME: "weatherdatatwo"
+  PRIMARY_KEY: "id"
+  CITY_ATTRIBUTE: "city"
+  TEMP_ATTRIBUTE: "temp"
 
 jobs:
   check-table:
@@ -18,23 +25,23 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }} 
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-1  # Update with your desired region
+        aws-region: us-east-1  
 
     - name: Check if DynamoDB table exists
       run: |
-        TABLE_NAME="WeatherDataTwo"
         TABLE_EXISTS=$(aws dynamodb list-tables --query "TableNames[?TableName=='$TABLE_NAME']" --output text)
         if [ -z "$TABLE_EXISTS" ]; then
           echo "Table does not exist. Creating table..."
           aws dynamodb create-table \
-            --table-name WeatherDataTwo \
             --attribute-definitions \
-            AttributeName=id,AttributeType=S \
-            AttributeName=city,AttributeType=S \
-            AttributeName=temperature,AttributeType=S \
-            --key-schema \
-            AttributeName=id,KeyType=HASH \
-            --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 \
+                  AttributeName=$PRIMARY_KEY,AttributeType=S \
+                  AttributeName=$CITY_ATTRIBUTE,AttributeType=S \
+                  AttributeName=$TEMP_ATTRIBUTE,AttributeType=N \
+              --key-schema \
+                  AttributeName=$PRIMARY_KEY,KeyType=HASH \
+              --provisioned-throughput \
+                  ReadCapacityUnits=5,WriteCapacityUnits=5 \
+              --region $AWS_REGION
         else
           echo "Table already exists."
         fi
