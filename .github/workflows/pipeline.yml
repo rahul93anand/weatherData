@@ -28,11 +28,14 @@ jobs:
         if [ -z "$TABLE_EXISTS" ]; then
           echo "Table does not exist. Creating table..."
           aws dynamodb create-table \
-            AttributeName=$PRIMARY_KEY,AttributeType=S \
-            AttributeName=city,AttributeType=S \
-            AttributeName=temp,AttributeType=N \
-          --key-schema \
-            AttributeName=$PRIMARY_KEY,KeyType=HASH \
+            --table-name $TABLE_NAME \
+            --attribute-definitions \
+              AttributeName=$PRIMARY_KEY,AttributeType=S \
+              AttributeName=city,AttributeType=S \
+              AttributeName=temp,AttributeType=N \
+            --key-schema \
+              AttributeName=$PRIMARY_KEY,KeyType=HASH \
+            --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 \
         else
           echo "Table already exists."
         fi
